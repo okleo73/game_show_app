@@ -24,7 +24,8 @@ function addPhraseToDisplay() {
         const li = document.createElement('li');
         const ul = document.querySelector('ul');
         ul.appendChild(li);
-        li.appendChild(phraseArray);
+        //li.appendChild(phraseArray);
+        li.textContent = phraseArray;
         if (phraseArray == ' ') {
             return null;
         } else {
