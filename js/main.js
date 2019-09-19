@@ -24,10 +24,9 @@ function addPhraseToDisplay() {
         const li = document.createElement('li');
         const ul = document.querySelector('ul');
         ul.appendChild(li);
-        //li.appendChild(phraseArray);
-        li.textContent = phraseArray;
-        if (phraseArray == ' ') {
-            return null;
+        li.textContent = phraseArray[i];
+        if (phraseArray[i] === ' ') {
+            li.className = 'space';
         } else {
              li.className = 'letter';
         }
