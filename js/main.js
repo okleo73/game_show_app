@@ -60,7 +60,7 @@ keyboard.addEventListener('click', (event) => {
     if (event.target.tagName == 'BUTTON') {//stumped
         event.target.className = 'chosen';
     }
-    let results = checkLetter();
+    let results = checkLetter(event.target.innerHTML);
     if (results == event.target.textContent) {
         //score.removeChild(hearts);
         score.style.display = 'none';
@@ -68,6 +68,17 @@ keyboard.addEventListener('click', (event) => {
 });
 
 
+//checkWin function
+const classLetter = document.querySelectorAll('.letter');
+const classShow = document.querySelectorAll('.show');
+// function checkWin() {
+//     overlay.className = 'win';
+//     //how do I change the headline text?
+//     overlay.style.display = 'flex';
+
+//     overlay.className = 'lose';
+//     overlay.style.display = 'flex';
+// }
 
 
 
