@@ -9,16 +9,15 @@ btnReset.addEventListener('click', () => {
   overlay.style.display = 'none';
 })
 
-function getRandomPhraseAsArray(arr) {
+const getRandomPhraseAsArray = (arr) => {
     const randomPhrase = phrases[(parseInt(Math.random() * phrases.length))];
     const splitRandomPhrase = randomPhrase.split('');
     return splitRandomPhrase;
 }
-//console.log(getRandomPhraseAsArray(phrases));
+ //console.log(getRandomPhraseAsArray(phrases));
 
 //Game display
 function addPhraseToDisplay() {
-    //let userInput = [ ];
     const phraseArray = getRandomPhraseAsArray(phrases);
     for(let i = 0; i < phraseArray.length; i++) {
         const li = document.createElement('li');
@@ -28,13 +27,48 @@ function addPhraseToDisplay() {
         if (phraseArray[i] === ' ') {
             li.className = 'space';
         } else {
-             li.className = 'letter';
+            li.className = 'letter';
         }
     }
-    console.log(phraseArray); 
+    //console.log(phraseArray); 
 }
 addPhraseToDisplay();
-//all characters have the class letters applied, other than the appendChild.
+
+//Letter check
+function checkLetter(userGuess) {
+    let phraseList = document.getElementById('phrase');
+    let listItems = phraseList.querySelectorAll('li');
+    //let listItemsClass = document.getElementsByClassName('letters');
+    let match = null;
+    for (let i = 0; i < listItems.length; i++) {
+        //let listItemsClass = listItems.getElementsByClassName('letters')[i]; 
+        if (userGuess == listItems[i].textContent) {
+            listItems[i].className = 'show'; 
+            match = userGuess;
+        }
+    }
+    return match;
+}
+
+
+//Event listener
+const keyboard = document.getElementById('qwerty');
+const score = document.getElementById('scoreboard');
+const hearts = document.querySelector('.tries');
+
+keyboard.addEventListener('click', (event) => {
+    if (event.target.tagName == 'BUTTON') {//stumped
+        event.target.className = 'chosen';
+    }
+    let results = checkLetter();
+    if (results == event.target.textContent) {
+        //score.removeChild(hearts);
+        score.style.display = 'none';
+    }
+});
+
+
+
 
 
 
