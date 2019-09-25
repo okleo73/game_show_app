@@ -53,33 +53,55 @@ function checkLetter(userGuess) {
 
 //Event listener
 const keyboard = document.getElementById('qwerty');
+// const score = document.querySelector('#scoreboard ol');
 const score = document.getElementById('scoreboard');
 const hearts = document.querySelector('.tries');
 
 keyboard.addEventListener('click', (event) => {
-    if (event.target.tagName == 'BUTTON') {//stumped
+    if (event.target.tagName == 'BUTTON') {
         event.target.className = 'chosen';
     }
-    let results = checkLetter(event.target.innerHTML);
-    if (results == event.target.textContent) {
+    let results = checkLetter(event.target.textContent);
+    if (event.target.textContent !== results) {
         //score.removeChild(hearts);
-        score.style.display = 'none';
+        //score.style.display = 'none';
+
+        const ol = document.getElementById('userScore');
+        const li = ol.firstElementChild;
+        ol.removeChild(li);
+        missed += 1;
+    
+        // const li = score.lastElementChild;
+        // score.removeChild(li);
+        
     }
 });
 
 
 //checkWin function
-const classLetter = document.querySelectorAll('.letter');
+//const classLetter = document.querySelectorAll('.letter');
 const classShow = document.querySelectorAll('.show');
-// function checkWin() {
-//     overlay.className = 'win';
-//     //how do I change the headline text?
-//     overlay.style.display = 'flex';
-
-//     overlay.className = 'lose';
-//     overlay.style.display = 'flex';
-// }
-
-
-
+//const classShow = document.querySelectorAll('.chosen');
+//const classLetter = document.querySelectorAll('.chosen');
+const classLetter = document.querySelectorAll('ul li');
+function checkWin() {
+    for(let i = 0; i < classLetter.length; i++) {
+       if (classLetter.length == classShow.length) { 
+            overlay.className = 'win';
+            overlay.style.display = 'flex';
+            overlay.textContent = "You won!";
+        } 
+        // if (classLetter.length[i] == [0]) { 
+        //     overlay.className = 'win';
+        //     overlay.style.display = 'flex';
+        //     overlay.textContent = "You won!";
+        // } 
+    }
+    // if (missed >= 4) {
+    //     overlay.className = 'lose';
+    //     overlay.style.display = 'flex';
+    //     overlay.textContent = "Sorry you lost";
+    // }  
+}
+checkWin();
 
