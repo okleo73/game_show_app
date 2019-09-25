@@ -43,7 +43,8 @@ function checkLetter(userGuess) {
     for (let i = 0; i < listItems.length; i++) {
         //let listItemsClass = listItems.getElementsByClassName('letters')[i]; 
         if (userGuess == listItems[i].textContent) {
-            listItems[i].className = 'show'; 
+            //listItems[i].className = 'show';  //add class here
+            listItems[i].classList.add("show");  //add class here
             match = userGuess;
         }
     }
@@ -72,36 +73,33 @@ keyboard.addEventListener('click', (event) => {
         missed += 1;
     
         // const li = score.lastElementChild;
-        // score.removeChild(li);
-        
+        // score.removeChild(li);  
     }
+    checkWin();
 });
 
 
 //checkWin function
-//const classLetter = document.querySelectorAll('.letter');
-const classShow = document.querySelectorAll('.show');
+
 //const classShow = document.querySelectorAll('.chosen');
 //const classLetter = document.querySelectorAll('.chosen');
-const classLetter = document.querySelectorAll('ul li');
+//const classLetter = document.querySelectorAll('ul li');
 function checkWin() {
+    const classLetter = document.querySelectorAll('.letter');
+    const classShow = document.querySelectorAll('.show');
     for(let i = 0; i < classLetter.length; i++) {
        if (classLetter.length == classShow.length) { 
             overlay.className = 'win';
             overlay.style.display = 'flex';
             overlay.textContent = "You won!";
         } 
-        // if (classLetter.length[i] == [0]) { 
-        //     overlay.className = 'win';
-        //     overlay.style.display = 'flex';
-        //     overlay.textContent = "You won!";
-        // } 
     }
-    // if (missed >= 4) {
-    //     overlay.className = 'lose';
-    //     overlay.style.display = 'flex';
-    //     overlay.textContent = "Sorry you lost";
-    // }  
+    if (missed > 4) {
+        overlay.className = 'lose';
+        overlay.style.display = 'flex';
+        overlay.textContent = "Sorry, you lost";
+    }  
 }
-checkWin();
+// checkWin();
+//called with every keypress
 
