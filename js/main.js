@@ -108,14 +108,14 @@ const checkWin = () => {
         overlay.style.display = 'flex';
         overlay.textContent = `Congrats ${username}, You won!`;
         gameReset();
-        win +=1;
+        // wins +=1;
     } 
     if (missed > 4) {
         overlay.className = 'lose';
         overlay.style.display = 'flex';
         overlay.textContent = `Sorry ${username}, try again next time`;
         gameReset();
-        loss +=1;
+        // loss +=1;
     }  
 }
 
@@ -143,10 +143,10 @@ keyboard.addEventListener('click', (event) => {
 });
 
 
-let totalScore = document.createElement('h3');
-totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
+// let totalScore = document.createElement('h3');
+// totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
 // totalScore.textContent = 'Wins:'+ wins + 'Loss:' + loss;
 // let x = win
 // let y = loss
-banner.append(totalScore);
+// banner.append(totalScore);
 
