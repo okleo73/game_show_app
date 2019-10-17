@@ -6,8 +6,9 @@ const overlay = document.getElementById('overlay');
 const btnReset = document.querySelector('.btn__reset');
 let username = prompt(`Pick a username!`);
 alert(`Hello ${username}, nice to see you. Please click the start game button to start a game of Beetle's Song trivia!`);
-let wins = 0; //need to create element for it and add it to banner under h2
+let wins = 0;
 let loss = 0;
+let best = 0;
 
 //listens for the start button to be clicked at the start of the game
 btnReset.addEventListener('click', () => {
@@ -60,7 +61,7 @@ const gameReset = () => {
     //adds try again button to win/lose screen
     let selectorStart = document.querySelector('#overlay');
     let tryAgainBttn = document.createElement('a');
-    tryAgainBttn.innerHTML = "Try again?";
+    tryAgainBttn.innerHTML = "Play again?";
     tryAgainBttn.className = "try-again-bttn";
     tryAgainBttn.style.color = "white";
     selectorStart.append(tryAgainBttn);
@@ -107,15 +108,17 @@ const checkWin = () => {
         overlay.className = 'win';
         overlay.style.display = 'flex';
         overlay.textContent = `Congrats ${username}, You won!`;
+        wins++;
         gameReset();
-        // wins +=1;
+
     } 
     if (missed > 4) {
         overlay.className = 'lose';
         overlay.style.display = 'flex';
         overlay.textContent = `Sorry ${username}, try again next time`;
+        loss++;
         gameReset();
-        // loss +=1;
+        
     }  
 }
 
@@ -143,10 +146,16 @@ keyboard.addEventListener('click', (event) => {
 });
 
 
-// let totalScore = document.createElement('h3');
-// totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
-// totalScore.textContent = 'Wins:'+ wins + 'Loss:' + loss;
-// let x = win
-// let y = loss
+let totalScore = document.createElement('p');
+let banners = document.querySelector('#banner');
+totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
+// totalScore.textContent = 'Wins:'+ wins + 'Loss:' + loss 'Best: ';
+// totalScore.add
 // banner.append(totalScore);
+banners.append(totalScore);
+
+// var scoreText;
+// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+// let score2 = 0;
+// scoreText = game.add.text(5, 5, 'Points: 0', { font: '18px Arial', fill: '#0095DD' });
 
