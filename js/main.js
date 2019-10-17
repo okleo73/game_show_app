@@ -8,7 +8,6 @@ let username = prompt(`Pick a username!`);
 alert(`Hello ${username}, nice to see you. Please click the start game button to start a game of Beetle's Song trivia!`);
 let wins = 0;
 let loss = 0;
-let best = 0;
 
 //listens for the start button to be clicked at the start of the game
 btnReset.addEventListener('click', () => {
@@ -98,8 +97,20 @@ const gameReset = () => {
         heartsReset[i].classList.remove('hide-hearts');
     }
     missed=0;
+
+    let oldScore = document.querySelector('#banner p');
+    // let banners2 = document.getElementById('banner');
+    // let banners2 = document.querySelector('.header');
+    // let oldScore = banners2.firstElementChild;
+    // banners2.removechild(oldScore);
+    oldScore.remove();
 }
 
+let totalScore = document.createElement('p');
+let banners = document.querySelector('#banner');
+totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
+
+banners.append(totalScore);
 //checks if game is won
 const checkWin = () => {
     const classLetter = document.querySelectorAll('.letter');
@@ -107,14 +118,15 @@ const checkWin = () => {
 
     let totalScore = document.createElement('p');
     let banners = document.querySelector('#banner');
-    banners.append(totalScore);
+    totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
     if (classLetter.length == classShow.length) {
         overlay.className = 'win';
         overlay.style.display = 'flex';
         overlay.textContent = `Congrats ${username}, You won!`;
         wins++;
 
-        totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
+        // totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
+        banners.append(totalScore);
         gameReset();
 
     } 
@@ -124,7 +136,8 @@ const checkWin = () => {
         overlay.textContent = `Sorry ${username}, try again next time`;
         loss++;
      
-        totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
+        // totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
+        banners.append(totalScore);
         gameReset();
         
     }  
@@ -135,22 +148,22 @@ keyboard.addEventListener('click', (event) => {
     if (event.target.tagName == 'BUTTON') {
         event.target.className = 'chosen';
         event.target.disabled = 'true';
-    }
-    let results = checkLetter(event.target.textContent);
-    if (event.target.textContent !== results) {
-        // const ol = document.getElementById('userScore');
-        // const li = ol.firstElementChild;
-        // ol.removeChild(li);
+    
+        let results = checkLetter(event.target.textContent);
+        if (event.target.textContent !== results) {
+            // const ol = document.getElementById('userScore');
+            // const li = ol.firstElementChild;
+            // ol.removeChild(li);
 
-        let hearts = document.querySelector('.tries');
-        hearts.className = ' ';
-        hearts.classList.add("hide-hearts"); 
-        hearts.style.display = "none";
+            let hearts = document.querySelector('.tries');
+            hearts.className = ' ';
+            hearts.classList.add("hide-hearts"); 
+            hearts.style.display = "none";
 
-        missed += 1; 
-        // let wrongGuess=document.getElementsByTagName("button");
-        event.target.style.backgroundColor = "orange";
-        // wrongGuess.style.backgroundColor = "orange";
+            missed += 1; 
+            event.target.style.backgroundColor = "orange";
+            
+        }
     }
     checkWin();
 });
@@ -158,7 +171,7 @@ keyboard.addEventListener('click', (event) => {
 
 // let totalScore = document.createElement('p');
 // let banners = document.querySelector('#banner');
-// totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
+// totalScore.textContent = `Wins:${wins}  Loss:${loss}`;
 // totalScore.textContent = 'Wins:'+ wins + 'Loss:' + loss 'Best: ';
 // totalScore.add
 // banner.append(totalScore);
