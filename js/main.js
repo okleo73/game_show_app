@@ -104,11 +104,17 @@ const gameReset = () => {
 const checkWin = () => {
     const classLetter = document.querySelectorAll('.letter');
     const classShow = document.querySelectorAll('.show');
+
+    let totalScore = document.createElement('p');
+    let banners = document.querySelector('#banner');
+    banners.append(totalScore);
     if (classLetter.length == classShow.length) {
         overlay.className = 'win';
         overlay.style.display = 'flex';
         overlay.textContent = `Congrats ${username}, You won!`;
         wins++;
+
+        totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
         gameReset();
 
     } 
@@ -117,6 +123,8 @@ const checkWin = () => {
         overlay.style.display = 'flex';
         overlay.textContent = `Sorry ${username}, try again next time`;
         loss++;
+     
+        totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
         gameReset();
         
     }  
@@ -140,19 +148,21 @@ keyboard.addEventListener('click', (event) => {
         hearts.style.display = "none";
 
         missed += 1; 
+        // let wrongGuess=document.getElementsByTagName("button");
         event.target.style.backgroundColor = "orange";
+        // wrongGuess.style.backgroundColor = "orange";
     }
     checkWin();
 });
 
 
-let totalScore = document.createElement('p');
-let banners = document.querySelector('#banner');
-totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
+// let totalScore = document.createElement('p');
+// let banners = document.querySelector('#banner');
+// totalScore.textContent = `Wins:${wins}  Loss:${loss} Best:${best}`;
 // totalScore.textContent = 'Wins:'+ wins + 'Loss:' + loss 'Best: ';
 // totalScore.add
 // banner.append(totalScore);
-banners.append(totalScore);
+// banners.append(totalScore);
 
 // var scoreText;
 // var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
