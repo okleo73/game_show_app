@@ -167,3 +167,7 @@ button {
 .hide-hearts {
   display: none;
 }
+.section p {
+  color: #5b85b7;
+  font-size: 2em;
+}
